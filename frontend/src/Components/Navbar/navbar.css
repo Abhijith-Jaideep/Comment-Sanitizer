@@ -1,0 +1,24 @@
+.navbar {
+    height: max-content;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+
+.navbar .nav-links {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-left: 2%;
+    padding-right: 2%;
+    flex-wrap: wrap;
+}
+
+.navbar .navbar-brand{
+    
+    transition: all 0.5s;
+}
+
+
+.navbar .navbar-brand:hover{
+    color:white;
+}

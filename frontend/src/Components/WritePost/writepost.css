@@ -1,0 +1,22 @@
+
+.writepost form {
+    background-image: url("./writebackground.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+
+
+.writepost .details {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5%;
+    color: white;
+    font-size: large;
+    width: 80%;
+}

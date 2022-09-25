@@ -1,0 +1,64 @@
+.signup h1 {
+    color: darkorange;
+}
+
+.signup .name{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.signup .signupcard {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    min-height: 75vh;
+}
+
+.signup .pic {
+    background-color: darkturquoise;
+}
+
+
+.signup .custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    background-color: darkorange;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.signup form {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: bold;
+}
+
+.signup .signupform {
+    width: 50%;
+    height: 100%;
+}
+
+.signup .btn{
+    border: none;
+    border-radius: 16px;
+    font-weight: bold;
+    background-color: darkorange; 
+}
+
+.signup .btn:hover{
+
+    color:white;
+    border-color:white;
+}
+
+
+@media(max-width:1000px) {
+    .signup .pic {
+        display: none;
+    }
+
+    .signup .signupform {
+        width: 100%;
+    }
+}

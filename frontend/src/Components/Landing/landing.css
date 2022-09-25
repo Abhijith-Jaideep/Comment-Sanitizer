@@ -1,0 +1,56 @@
+.Landing{
+    height: 100vh;
+}
+
+hr{
+    color: white;
+    width: 40%;
+    height: 2px;
+    background-color: white;
+}
+
+.Landing .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.Landing h1 {
+    color:darkorange;
+    
+}
+
+.Landing span , .Landing p{
+    color:grey;
+    font-weight: bold;
+}
+.Landing h2{
+    color: white;
+    font-style: italic;
+}
+
+.Landing .image {
+    background-image: url("workdesk.jpg");
+    background-size:cover;
+    width: 90%;
+    height: 70%;
+    margin-bottom:2%;
+}
+
+.Landing .transparent{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0, 0, 0.6);
+}
+
+.Landing .btn{
+    color: white;
+    font-weight: bold;
+}
