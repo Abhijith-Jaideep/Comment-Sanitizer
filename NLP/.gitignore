@@ -1,0 +1,5 @@
+# Local training environment and data
+.venv/
+__pycache__/
+train.csv
+test.csv
