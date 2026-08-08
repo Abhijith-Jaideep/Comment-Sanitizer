@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import AlertContext from '../../context/Alert/AlertContext'
 import "./postitem.css"
 import defaultimg from './postimg.jpg'
+import API_BASE from "../../config"
 
 
 const PostItem = (props) => {
@@ -17,7 +18,7 @@ const PostItem = (props) => {
     const [rerender, setrerender] = useState(0)
 
     const fetchuserdatabyusername = async () => {
-        const response = await fetch(`http://localhost:5000/api/auth/fetchbyusername/${props.username}`, {
+        const response = await fetch(`${API_BASE}/api/auth/fetchbyusername/${props.username}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

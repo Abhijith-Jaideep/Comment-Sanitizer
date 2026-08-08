@@ -3,6 +3,7 @@ const fetchUser = require("../middleware/fetchUser")
 const commentmodel = require("../models/Comments")
 const usermodel = require("../models/User")
 const axios = require('axios').default
+const { NLP_URL } = require("../config")
 const router = express.Router()
 
 router.get("/fetchComments/:id", async (req, res) => {
@@ -27,7 +28,7 @@ router.post("/postComment/:id", fetchUser, async (req, res) => {
         const { comment } = req.body
 
         const  safe = await axios.post(
-            'http://localhost:7000/',
+            NLP_URL,
             {
                 body: JSON.stringify({comment}),
                 headers: {
@@ -62,7 +63,7 @@ router.put("/updateComment/:commentid", fetchUser, async (req, res) => {
         if (foundComment.username != user.username) return res.status(401).json({ msg: "illegal operation" })
 
         const  safe = await axios.post(
-            'http://localhost:7000/',
+            NLP_URL,
             {
                 body: JSON.stringify({comment}),
                 headers: {

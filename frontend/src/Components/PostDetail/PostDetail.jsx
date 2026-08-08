@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import Post from './Post'
+import API_BASE from "../../config"
 
 
 const PostDetail = () => {
@@ -10,7 +11,7 @@ const PostDetail = () => {
 
     const fetchonepost = async () => {
         const id = localStorage.getItem('postid')
-        const response = await fetch(`http://localhost:5000/api/posts/fetchonepost/${id}`, {
+        const response = await fetch(`${API_BASE}/api/posts/fetchonepost/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import AlertContext from '../../context/Alert/AlertContext'
 import CommentSection from "./CommentSection/CommentSection"
 import "./post.css"
+import API_BASE from "../../config"
 
 const Post = (props) => {
 
@@ -15,7 +16,7 @@ const Post = (props) => {
     const [rerender, setrerender] = useState(0)
 
     const fetchuserdatabyusername = async () => {
-        const response = await fetch(`http://localhost:5000/api/auth/fetchbyusername/${props.username}`, {
+        const response = await fetch(`${API_BASE}/api/auth/fetchbyusername/${props.username}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

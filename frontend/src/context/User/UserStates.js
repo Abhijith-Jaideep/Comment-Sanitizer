@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import UserContext from './UserContext'
+import API_BASE from "../../config"
 
 
 
@@ -9,7 +10,7 @@ const UserStates = (props) => {
     
 
     const fetchuserdata = async () => {
-        const response = await fetch("http://localhost:5000/api/auth/fetch", {
+        const response = await fetch(`${API_BASE}/api/auth/fetch`, {
             method: "GET",
             headers: {
                 "auth-token": localStorage.getItem('token')
@@ -33,7 +34,7 @@ const UserStates = (props) => {
         data.append("profilepic",file)
 
 
-        const response = await fetch("http://localhost:5000/api/auth/signup", {
+        const response = await fetch(`${API_BASE}/api/auth/signup`, {
             method: "POST",
             body: data
         })
@@ -46,7 +47,7 @@ const UserStates = (props) => {
 
         const data = JSON.stringify({ username, password })
 
-        const response = await fetch("http://localhost:5000/api/auth/login", {
+        const response = await fetch(`${API_BASE}/api/auth/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

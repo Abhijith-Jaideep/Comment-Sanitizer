@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken")
 const fs = require("fs")
 const multer = require("multer")
 const fetchUser = require("../middleware/fetchUser")
+const { JWT_SECRET } = require("../config")
 
 
 const storage = multer.diskStorage({
@@ -58,7 +59,7 @@ router.post("/login", async (req, res) => {
             id: search._id
         }
 
-        const token = jwt.sign(data, "shhh")
+        const token = jwt.sign(data, JWT_SECRET)
 
         return res.json({ token })
 
