@@ -1,0 +1,47 @@
+# Render blueprint. From the dashboard: New > Blueprint, point it at this
+# repo, and both backend services come up configured.
+#
+# The frontend is not here. It is a static CRA build and belongs on Vercel,
+# which has no cold start, so the pages stay instant even when the API is
+# asleep.
+
+services:
+  # The sanitiser. Must exist before the API, which needs its URL.
+  - type: web
+    name: comment-sanitizer-nlp
+    runtime: python
+    rootDir: NLP
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    # NLP.py's app.run() is development only. One worker on purpose: each one
+    # loads its own copy of sklearn, pandas and the pickles, and the free tier
+    # has 512MB total.
+    startCommand: gunicorn NLP:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.10"
+
+  - type: web
+    name: comment-sanitizer-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      # Render generates a random value, so no secret is ever committed.
+      - key: JWT_SECRET
+        generateValue: true
+      # Set by hand in the dashboard. sync:false means "prompt me, do not
+      # store it in the repo".
+      - key: MONGO_URI
+        sync: false
+      # Full https:// URL of the NLP service above, with trailing slash.
+      # Not wired automatically because Render can supply the host but not
+      # the scheme, and axios needs the scheme.
+      - key: NLP_URL
+        sync: false
+      # The Vercel frontend URL, so the API is not open to every origin.
+      - key: CORS_ORIGIN
+        sync: false

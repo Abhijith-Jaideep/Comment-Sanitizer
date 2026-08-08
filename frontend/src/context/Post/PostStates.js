@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PostContext from './PostContext'
+import API_BASE from "../../config"
 
 
 const PostStates = (props) => {
@@ -8,7 +9,7 @@ const PostStates = (props) => {
     const [userpost, setuserpost] = useState([])
 
     const fetchAllPosts = async () => {
-        const response = await fetch("http://localhost:5000/api/posts/allPosts", {
+        const response = await fetch(`${API_BASE}/api/posts/allPosts`, {
             method: "GET"
         })
         const json = await response.json()
@@ -17,7 +18,7 @@ const PostStates = (props) => {
     }
 
     const fetchUserPosts = async () => {
-        const response = await fetch("http://localhost:5000/api/posts/getUserPosts", {
+        const response = await fetch(`${API_BASE}/api/posts/getUserPosts`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +36,7 @@ const PostStates = (props) => {
         data.append("description",description)
         data.append("postimg",file)
 
-        const response = await fetch("http://localhost:5000/api/posts/createPost", {
+        const response = await fetch(`${API_BASE}/api/posts/createPost`, {
             method: "POST",
             headers: {
                 
@@ -50,7 +51,7 @@ const PostStates = (props) => {
     }
 
     const deletePost = async (id) => {
-        const response = await fetch(`http://localhost:5000/api/posts/deletePost/${id}`, {
+        const response = await fetch(`${API_BASE}/api/posts/deletePost/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -66,7 +67,7 @@ const PostStates = (props) => {
     const updatePost = async (title, description, id) => {
 
         const data = { title, description }
-        const response = await fetch(`http://localhost:5000/api/posts/updatePost/${id}`, {
+        const response = await fetch(`${API_BASE}/api/posts/updatePost/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

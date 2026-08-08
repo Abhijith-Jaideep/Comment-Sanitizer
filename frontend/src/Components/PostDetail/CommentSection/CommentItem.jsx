@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useEffect } from 'react'
 import UserContext from '../../../context/User/UserContext'
+import API_BASE from "../../../config"
 
 const CommentItem = (props) => {
 
@@ -12,7 +13,7 @@ const CommentItem = (props) => {
     const [rerender, setrerender] = useState(0)
 
     const fetchuserdatabyusername = async () => {
-        const response = await fetch(`http://localhost:5000/api/auth/fetchbyusername/${props.username}`, {
+        const response = await fetch(`${API_BASE}/api/auth/fetchbyusername/${props.username}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

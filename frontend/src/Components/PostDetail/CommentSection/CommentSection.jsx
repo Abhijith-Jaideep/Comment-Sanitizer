@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import AlertContext from '../../../context/Alert/AlertContext'
 import CommentItem from './CommentItem'
+import API_BASE from "../../../config"
 
 const CommentSection = () => {
 
@@ -20,7 +21,7 @@ const CommentSection = () => {
     const postComment = async () => {
 
         const postid = localStorage.getItem("postid")
-        const response = await fetch(`http://localhost:5000/api/comments/postComment/${postid}`, {
+        const response = await fetch(`${API_BASE}/api/comments/postComment/${postid}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -37,7 +38,7 @@ const CommentSection = () => {
 
     const fetchComments = async () => {
         const id = localStorage.getItem("postid")
-        const response = await fetch(`http://localhost:5000/api/comments/fetchComments/${id}`, {
+        const response = await fetch(`${API_BASE}/api/comments/fetchComments/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -63,7 +64,7 @@ const CommentSection = () => {
     }
 
     const handleClickUpdate = async () => {
-        const response = await fetch(`http://localhost:5000/api/comments/updateComment/${localStorage.getItem("cid")}`, {
+        const response = await fetch(`${API_BASE}/api/comments/updateComment/${localStorage.getItem("cid")}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -93,7 +94,7 @@ const CommentSection = () => {
 
 
     const handleClickDelete = async () => {
-        const response = await fetch(`http://localhost:5000/api/comments/deleteComment/${localStorage.getItem("cid")}`, {
+        const response = await fetch(`${API_BASE}/api/comments/deleteComment/${localStorage.getItem("cid")}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
