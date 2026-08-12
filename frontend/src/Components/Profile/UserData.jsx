@@ -4,21 +4,25 @@ import { useEffect } from 'react'
 import "./userdata.css"
 const UserData = (props) => {
 
-    const [date, setdate] = useState()
-    const [rerender, setrerender] = useState(0)
+    const [date, setdate] = useState("")
 
-    const calcDate = () => {
-
-        setdate(new Date(props.userdata.timestamp).toLocaleDateString('en-In', { timeZone: 'Asia/Kolkata' }))
-        setTimeout(() => {
-            if (rerender === 0) setrerender(1)
-        }, 200)
-    }
-
+    // This used to read the timestamp on mount and once more behind a 200ms
+    // setTimeout. The profile request takes longer than that, so both reads
+    // got undefined, and the footer was stuck on "Invalid Date". Watching the
+    // timestamp means it formats whenever the data actually lands.
     useEffect(() => {
-        calcDate()
-        // eslint-disable-next-line
-    }, [rerender])
+        const timestamp = props.userdata.timestamp
+        if (!timestamp) {
+            setdate("")
+            return
+        }
+        const parsed = new Date(timestamp)
+        setdate(
+            Number.isNaN(parsed.getTime())
+                ? ""
+                : parsed.toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })
+        )
+    }, [props.userdata.timestamp])
 
 
     return (
@@ -41,7 +45,7 @@ const UserData = (props) => {
 
                 </div>
                 <div className={`card-footer bg-${props.mode === "light" ? 'light' : 'black'}`}>
-                    Account created on {date}
+                    {date ? `Account created on ${date}` : " "}
                 </div>
             </div>
         </div >

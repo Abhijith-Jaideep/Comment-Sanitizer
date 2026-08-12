@@ -1,18 +1,44 @@
-.userdata .card{
-    width:45%;
+/* The card and the info column used to be locked to 45% and 50% at every
+   width. On a phone that produced a 111px card with the avatar sitting on top
+   of the name. Both go full width below the medium breakpoint, and the card
+   body stacks rather than trying to sit side by side in no space. */
+.userdata .card {
+    width: 45%;
 }
-.userdata .card-body{
+
+.userdata .card-body {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-evenly;
+    gap: 1rem;
 }
-.userdata .info{
+
+.userdata .info {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 50%;
-    
+}
+
+.userdata .info h5 {
+    margin-bottom: 0.4rem;
+    word-break: break-word;
+}
+
+@media (max-width: 991.98px) {
+    .userdata .card {
+        width: 100%;
+    }
+
+    .userdata .card-body {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .userdata .info {
+        width: 100%;
+    }
 }

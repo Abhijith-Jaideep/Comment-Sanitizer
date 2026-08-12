@@ -49,19 +49,26 @@ const Feed = () => {
 
 
       <div className='mt-5'>
-        <div class="input-group container mb-3">
-          <span class="input-group-text" id="basic-addon3" style={{backgroundColor:"darkorange"}}>Search Posts</span>
-          <input type="text" class="form-control" id="basic-url" onChange={search} value={searchText} aria-describedby="basic-addon3" />
+        <div className="input-group container mb-3">
+          <span className="input-group-text" id="basic-addon3" style={{ backgroundColor: "darkorange" }}>Search Posts</span>
+          <input type="text" className="form-control" id="basic-url" onChange={search} value={searchText} aria-describedby="basic-addon3" />
         </div>
-          <h3 className='container'>Search: {searchText}</h3>
+        {searchText && <h3 className='container'>Search: {searchText}</h3>}
       </div>
 
 
       <div className={`container text-${mode === "dark" ? "white" : "black"}`}>
-        {posts.length === 0 && <h1>No Posts in the blog</h1>}
+        {/* Only an empty result, not an in-flight one. This used to announce
+            "No Posts in the blog" underneath the spinner while the request
+            was still running. */}
+        {!loading && posts.length === 0 && <h1>No Posts in the blog</h1>}
       </div>
       {loading && <Spinner />}
-      <div className="row container-fluid row-cols-1 row-cols-md-3 g-4 w-100">
+      {/* `row` and `container-fluid` on one element fight each other: the row's
+          negative gutters pull it 12px past the viewport. The row belongs
+          inside the container. */}
+      <div className="container-fluid">
+        <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         {
           searchText.length !== 0 && displayPosts.map((element) => {
             return <div className="col" key={element._id} style={{}}>
@@ -77,6 +84,7 @@ const Feed = () => {
             </div>
           })
         }
+        </div>
       </div>
 
     </div>
