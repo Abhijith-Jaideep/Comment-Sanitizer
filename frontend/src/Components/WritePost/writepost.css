@@ -1,17 +1,20 @@
 
+/* `height: 80vh` with `overflow: hidden` silently cut the bottom off the form
+   whenever the fields needed more room than the viewport allowed, which is
+   the normal case on a phone in landscape or with a large font size.
+   min-height keeps the tall backdrop on desktop while letting the form grow. */
 .writepost form {
     background-image: url("./writebackground.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    height: 80vh;
+    background-position: center;
+    min-height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
+    padding: 1.5rem 0;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
-
-
 
 .writepost .details {
     background-color: rgba(0, 0, 0, 0.6);
@@ -19,4 +22,17 @@
     color: white;
     font-size: large;
     width: 80%;
+}
+
+/* The file input reports a fixed intrinsic width and pushed past the right
+   edge of the panel. */
+.writepost .details input[type="file"] {
+    max-width: 100%;
+}
+
+@media (max-width: 767.98px) {
+    .writepost .details {
+        width: 92%;
+        padding: 1.25rem;
+    }
 }

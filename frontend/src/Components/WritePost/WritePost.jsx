@@ -69,9 +69,9 @@ const WritePost = () => {
             </div>
 
             <div className="mb-3">
-              <div class="form-group">
+              <div className="form-group">
                 <label for="">Image</label>
-                <input type="file" class="form-control-file" onChange={onFileChange} name="postimg" />
+                <input type="file" className="form-control form-control-sm" onChange={onFileChange} name="postimg" />
               </div>
             </div>
 
