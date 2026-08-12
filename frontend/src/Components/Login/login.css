@@ -44,3 +44,10 @@
         width: 100%;
     }
 }
+/* The card is a fixed 75vh, which is fine beside the picture on desktop. Once
+   the picture is hidden and the form stacks, a taller form clips inside it. */
+@media (max-width: 1000px) {
+    .Login .logincard {
+        height: auto;
+    }
+}
