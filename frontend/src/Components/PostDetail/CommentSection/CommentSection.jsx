@@ -140,6 +140,19 @@ const CommentSection = () => {
         // eslint-disable-next-line
     }, [rerender])
 
+    // Start waking the sanitiser as soon as the post opens, rather than when
+    // Send is pressed. On a free tier the service sleeps after fifteen idle
+    // minutes and takes about a minute to come back, and that minute used to
+    // land on the reader right after they had typed a comment. Reading the
+    // post and writing a reply is easily enough time to cover it.
+    //
+    // Fire and forget on purpose. If the warm-up fails the comment still
+    // posts, it is just slower, so there is nothing to report and nothing to
+    // block on.
+    useEffect(() => {
+        fetch(`${API_BASE}/warm`).catch(() => {})
+    }, [])
+
     return (
 
         <div>
