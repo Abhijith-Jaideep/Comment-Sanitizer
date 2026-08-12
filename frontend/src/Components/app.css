@@ -1,6 +1,20 @@
+/* The header is fixed-top, so the body has to clear it itself.
 
-.app .body{
-    padding-top: 5%;
+   This used to be `padding-top: 5%`. Percentage padding resolves against the
+   containing block's WIDTH, not its height, so on a 1280px desktop it happened
+   to produce 64px and cleared the bar, while on a 390px phone it produced 19px
+   and the navbar sat on top of the page heading. A fixed offset behaves the
+   same at every width. */
+.app .body {
+    padding-top: 4.5rem;
     min-height: 100vh;
 }
 
+/* Cards are laid out at w-75 for desktop reading width. At phone widths that
+   leaves them cramped between two margins, so let them use the full column.
+   Done here rather than in each component to keep the change to one place. */
+@media (max-width: 767.98px) {
+    .app .body .w-75 {
+        width: 100% !important;
+    }
+}

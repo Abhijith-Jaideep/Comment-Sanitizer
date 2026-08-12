@@ -62,3 +62,9 @@
         width: 100%;
     }
 }
+/* Same as the login card: fixed height clips the stacked form on a phone. */
+@media (max-width: 1000px) {
+    .signup .signupcard {
+        height: auto;
+    }
+}
