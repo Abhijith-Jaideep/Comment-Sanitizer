@@ -67,10 +67,20 @@ router.post("/login", async (req, res) => {
     } catch (e) { res.status(500) }
 })
 
+// Both read routes returned the whole document, which includes the bcrypt
+// password hash. A hash should never leave the server: it hands an attacker
+// something they can crack offline at their own pace, with no rate limit and
+// no sign to us that it is happening. /fetchbyusername has no auth middleware
+// either, so any username was enough to pull one.
+//
+// Login still reads the full document deliberately, because bcrypt.compare
+// needs the hash. It returns only a token.
+const WITHOUT_PASSWORD = "-password"
+
 router.get("/fetch", fetchUser, async (req, res) => {
     try {
 
-        const user = await usermodel.findById(req.id)
+        const user = await usermodel.findById(req.id).select(WITHOUT_PASSWORD)
         if (!user) return res.status(400).json({ msg: "user not found" })
 
         return res.json(user)
@@ -80,7 +90,9 @@ router.get("/fetch", fetchUser, async (req, res) => {
 router.get("/fetchbyusername/:username",async (req, res) => {
     try {
 
-        const user = await usermodel.findOne({username:req.params.username})
+        const user = await usermodel
+            .findOne({ username: req.params.username })
+            .select(WITHOUT_PASSWORD)
         if (!user) return res.status(400).json({ msg: "user not found" })
 
         return res.json(user)
